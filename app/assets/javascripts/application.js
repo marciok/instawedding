@@ -10,6 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require jquery-1.6.1.min.js
 //= require jquery_ujs
+//= require jquery.easing.min
+//= require supersized.3.2.7
+//= require supersized.shutter
 //= require_tree .

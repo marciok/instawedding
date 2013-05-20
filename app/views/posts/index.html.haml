@@ -1,0 +1,25 @@
+= javascript_include_tag url_for(:action => 'index', :format => 'js')
+/ Thumbnail Navigation
+/ <div id="prevthumb"></div>
+/ <div id="nextthumb"></div>
+/ Arrow Navigation
+/ <a id="prevslide" class="load-item"></a>
+/ <a id="nextslide" class="load-item"></a>
+#thumb-tray.load-item
+  -# #thumb-back
+  -# #thumb-forward
+/ Time Bar
+#progress-back.load-item
+  #progress-bar
+/ Control Bar
+#controls-wrapper.load-item
+  #controls
+    -# %a#play-button
+    -#   %img#pauseplay{:src => "assets/pause.png"}/
+    / Slide captions displayed here
+    #slidecaption
+    / Thumb Tray button
+    -# %a#tray-button
+    -#   %img#tray-arrow{:src => "assets/button-tray-up.png" }/
+    / Navigation
+    -# %ul#slide-list
