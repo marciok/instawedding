@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def latest
-    @posts = Post.where(state: 'notviewed').asc(:created_at).limit(3)
+    @posts = Post.where(state: 'notviewed').asc(:created_at).limit(1)
     @posts.map do |post|
       UpdatePostState.perform_async(post.id)
     end

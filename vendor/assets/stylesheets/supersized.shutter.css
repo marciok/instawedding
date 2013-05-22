@@ -73,14 +73,23 @@
 				ul#thumb-list li:hover{ cursor:pointer; }
 				
 /* My custom caption wrapper–– */
-.caption-wrapper {
+
+
+
+.caption {
   background-color:rgba(77,77,77,0.5);
   overflow: hidden;
   padding: 5px;
   border-radius: 5px;
   margin: 0 30px;
   height: 60px;
+  display: none;
 }
+
+.current-caption {
+  display: block;
+}
+
 .caption-wrapper img {
   float: left;
   margin: 0 15px 0 0;

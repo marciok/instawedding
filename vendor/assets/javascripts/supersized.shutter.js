@@ -55,6 +55,13 @@
 			if ($(vars.slide_total).length){
 				$(vars.slide_total).html(api.options.slides.length);
 			}
+
+      // Caption list
+      for (var i = 0, l = api.options.slides.length; i < l; i ++) {
+        var slide = api.options.slides[i];
+        $('.caption-wrapper').append(slide.title);
+      }
+      $('.caption-wrapper .caption').eq(vars.current_slide).addClass('current-caption');
 			
 			
 			/* Thumbnail Tray Navigation
@@ -223,14 +230,19 @@
 	 	/* Before Slide Transition
 		----------------------------*/
 	 	beforeAnimation : function(direction){
+      
+        $('.caption-wrapper .current-caption').removeClass('current-caption');
+        $('.caption-wrapper .caption').eq(vars.current_slide).addClass('current-caption');
+
+        // if ($(vars.slide_caption).length){
+        //   console.info(api.getField('title'));
+        //   (api.getField('title')) ? $(vars.slide_caption).html(api.getField('title')) : $(vars.slide_caption).html('');
+        // }
+        
 		    if (api.options.progress_bar && !vars.is_paused) $(vars.progress_bar).stop().css({left : -$(window).width()});
 		  	
 		  	/* Update Fields
 		  	----------------------------*/
-		  	// Update slide caption
-		   	if ($(vars.slide_caption).length){
-		   		(api.getField('title')) ? $(vars.slide_caption).html(api.getField('title')) : $(vars.slide_caption).html('');
-		   	}
 		    // Update slide number
 			if (vars.slide_current.length){
 			    $(vars.slide_current).html(vars.current_slide + 1);
@@ -284,7 +296,40 @@
 	 	/* After Slide Transition
 		----------------------------*/
 	 	afterAnimation : function(){
+        $.getJSON('/posts/latest.json',function(data){
+          console.info('calling latest')
+          if (data.posts !== 0){
+            for (var i = 0, l = data.posts.length; i < l; i ++) {
+              var post = data.posts[i];
+
+              if (vars.current_slide === $('#supersized li').length - 1) {
+                $('#supersized li').first().find('img').attr('src',post.image);
+                $('#thumb-list li').first().find('img').attr('src',post.thumb);
+
+                $('.caption-wrapper .caption').first().find('img').attr('src',post.profile);
+                $('.caption-wrapper .caption').first().find('h2').text(post.author);
+                $('.caption-wrapper .caption').first().find('p').text(post.text);
+
+              } else {
+                $('#supersized .activeslide').next().find('img').attr('src',post.image);
+                $('#thumb-list .current-thumb').next().find('img').attr('src',post.thumb);
+
+                $('.caption-wrapper .current-caption').next().find('img').attr('src',post.profile);
+                $('.caption-wrapper .current-caption').next().find('h2').text(post.author);
+                $('.caption-wrapper .current-caption').next().find('p').text(post.text);
+              }
+              console.info('updated fields')
+              // Update slide caption
+            }
+          }
+        });
+      
 	 		if (api.options.progress_bar && !vars.is_paused) theme.progressBar();	//  Start progress bar
+        if (vars.current_slide === $('#supersized li').length - 1) {
+          console.info('last');
+          // A bug fix to keep the slider circular
+          api.playToggle();
+        }
 	 	},
 	 	
 	 	
