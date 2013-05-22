@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :validate_instagram_token, only: [ :index ]
 
   def create
     # should i create here and fetch via worker ??
@@ -22,6 +23,14 @@ class PostsController < ApplicationController
     end
     respond_to do |format|
       format.json
+    end
+  end
+
+  private
+
+  def validate_instagram_token
+    if params[:'hub.challenge']
+       render text: params[:'hub.challenge']
     end
   end
 
