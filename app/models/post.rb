@@ -10,4 +10,11 @@ class Post
 
   validates :author, :text, :insta_id, presence: true
 
+  state_machine :state, initial: :notviewed do
+    event :viewed do
+      transition notviewed: :visualized
+    end
+
+  end
+
 end

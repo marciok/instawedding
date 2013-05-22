@@ -291,7 +291,7 @@
 	 	/* Progress Bar
 		----------------------------*/
 		progressBar : function(){
-    		$(vars.progress_bar).stop().css({left : -$(window).width()}).animate({ left:0 }, api.options.slide_interval,function(){console.info('finished')});
+    		$(vars.progress_bar).stop().css({left : -$(window).width()}).animate({ left:0 }, api.options.slide_interval);
     	}
 	 	
 	 

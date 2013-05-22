@@ -1,0 +1,11 @@
+<%= ActiveSupport::JSON.encode({
+  posts: (@posts || []).map do |post|
+    {
+      image: post.image.standart,
+      text: post.text,
+      author: post.author,
+      profile: post.image.profile,
+      thumb: post.image.thumbnail
+    }
+  end
+}).html_safe  %>
