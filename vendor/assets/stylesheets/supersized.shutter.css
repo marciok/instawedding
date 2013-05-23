@@ -15,8 +15,8 @@
 	----------------------------*/
 	#controls-wrapper { margin:0 auto; height:120px; width:100%; bottom:0px; left:0; z-index:4; position:fixed; }
 		#controls { overflow:hidden; height:100%; position:relative; text-align:left; z-index:5; }
-			#slidecounter { float:left; color:#999; font:14px "Helvetica Neue", Helvetica, Arial, sans-serif; text-shadow:#000 0 -1px 0; margin:0px 10px 0 15px; line-height:42px; }
-			#slidecaption { overflow:hidden; color:#FFF; font:400 14px "Helvetica Neue", Helvetica, Arial, sans-serif; text-shadow:#000 1px 1px 2px; margin:0 20px 0 0; }
+			#slidecounter { float:left; color:#999; font:14px; text-shadow:#000 0 -1px 0; margin:0px 10px 0 15px; line-height:42px; }
+			#slidecaption { overflow:hidden; color:#FFF; font:400 14px; text-shadow:#000 1px 1px 2px; margin:0 20px 0 0; }
 			
 			#navigation { float:right; margin:0px 20px 0 0; }
 				#play-button{ float:left; margin-top:1px;border-right:1px solid #333; background:url('bg-hover.png') repeat-x 0 44px; }
@@ -84,6 +84,11 @@
   margin: 0 30px;
   height: 60px;
   display: none;
+}
+
+.caption h2 {
+  color: rgb(66, 144, 206);
+  text-shadow:0;
 }
 
 .current-caption {
