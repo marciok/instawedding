@@ -255,12 +255,12 @@
 		    
 				$('.current-thumb').removeClass('current-thumb');
 				$('li', vars.thumb_list).eq(vars.current_slide).addClass('current-thumb');
-        // setTimeout(function() {
-        //   $(vars.thumb_tray).stop().animate({bottom : 0, avoidTransforms : true}, 300 );
-        // }, 6000); // 1 second
-        // setTimeout(function() {
-        //   $(vars.thumb_tray).stop().animate({bottom : -$(vars.thumb_tray).height(), avoidTransforms : true}, 300 );
-        // }, 2000);
+        setTimeout(function() {
+          $(vars.thumb_tray).stop().animate({bottom : 0, avoidTransforms : true}, 300 );
+        }, 6000); // 1 second
+        setTimeout(function() {
+          $(vars.thumb_tray).stop().animate({bottom : -$(vars.thumb_tray).height(), avoidTransforms : true}, 300 );
+        }, 2000);
         
 				
 				// If thumb out of view
@@ -300,7 +300,6 @@
         $.getJSON('/posts/last.json',function(data){
           if (data !== undefined) {
             console.info('calling latest');
-            console.info(data.post.image);
 
             if (vars.current_slide === $('#supersized li').length - 1) {
               $('#supersized li').first().find('img').attr('src',data.post.image);
@@ -319,16 +318,10 @@
               $('.caption-wrapper .current-caption').next().find('p').text(data.post.text);
             }
             console.info('updated fields')
-            // Update slide caption
           }
         });
-      
+
 	 		if (api.options.progress_bar && !vars.is_paused) theme.progressBar();	//  Start progress bar
-        if (vars.current_slide === $('#supersized li').length - 1) {
-          console.info('last');
-          // A bug fix to keep the slider circular
-          api.playToggle();
-        }
 	 	},
 	 	
 	 	

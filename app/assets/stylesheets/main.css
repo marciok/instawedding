@@ -15,8 +15,12 @@ body {
 
 h1 {
   position: absolute;
-  top: 8px;
-  left: 30%;
+  width: 700px;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   font-family: 'Museo700',Verdana,Helvetica,sans-serif;
   text-align: center;
   color: #fff;
