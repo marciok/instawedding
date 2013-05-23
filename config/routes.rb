@@ -15,7 +15,7 @@ InstaWedding::Application.routes.draw do
 
   # Sample resource route with options:
   resources :posts, only: [ :index, :create ]
-  match 'posts/latest' => 'posts#latest'
+  match 'posts/last' => 'posts#last'
   
   #     member do
   #       get 'short'

@@ -1,0 +1,9 @@
+<%= ActiveSupport::JSON.encode({
+  post: {
+    image: @post.image.standart,
+    text: @post.text,
+    author: @post.author,
+    profile: @post.image.profile,
+    thumb: @post.image.thumbnail
+  }
+}).html_safe  %>

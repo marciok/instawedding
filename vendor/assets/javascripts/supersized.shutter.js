@@ -19,6 +19,7 @@
 	 	/* Initial Placement
 		----------------------------*/
 	 	_init : function(){
+      $.ajaxSetup({ cache: false });
 	 		
 	 		// Center Slide Links
 	 		if (api.options.slide_links) $(vars.slide_list).css('margin-left', -$(vars.slide_list).width()/2);
@@ -296,31 +297,29 @@
 	 	/* After Slide Transition
 		----------------------------*/
 	 	afterAnimation : function(){
-        $.getJSON('/posts/latest.json',function(data){
-          console.info('calling latest')
-          if (data.posts !== 0){
-            for (var i = 0, l = data.posts.length; i < l; i ++) {
-              var post = data.posts[i];
+        $.getJSON('/posts/last.json',function(data){
+          if (data !== undefined) {
+            console.info('calling latest');
+            console.info(data.post.image);
 
-              if (vars.current_slide === $('#supersized li').length - 1) {
-                $('#supersized li').first().find('img').attr('src',post.image);
-                $('#thumb-list li').first().find('img').attr('src',post.thumb);
+            if (vars.current_slide === $('#supersized li').length - 1) {
+              $('#supersized li').first().find('img').attr('src',data.post.image);
+              $('#thumb-list li').first().find('img').attr('src',data.post.thumb);
 
-                $('.caption-wrapper .caption').first().find('img').attr('src',post.profile);
-                $('.caption-wrapper .caption').first().find('h2').text(post.author);
-                $('.caption-wrapper .caption').first().find('p').text(post.text);
+              $('.caption-wrapper .caption').first().find('img').attr('src',data.post.profile);
+              $('.caption-wrapper .caption').first().find('h2').text(data.post.author);
+              $('.caption-wrapper .caption').first().find('p').text(data.post.text);
 
-              } else {
-                $('#supersized .activeslide').next().find('img').attr('src',post.image);
-                $('#thumb-list .current-thumb').next().find('img').attr('src',post.thumb);
+            } else {
+              $('#supersized .activeslide').next().find('img').attr('src',data.post.image);
+              $('#thumb-list .current-thumb').next().find('img').attr('src',data.post.thumb);
 
-                $('.caption-wrapper .current-caption').next().find('img').attr('src',post.profile);
-                $('.caption-wrapper .current-caption').next().find('h2').text(post.author);
-                $('.caption-wrapper .current-caption').next().find('p').text(post.text);
-              }
-              console.info('updated fields')
-              // Update slide caption
+              $('.caption-wrapper .current-caption').next().find('img').attr('src',data.post.profile);
+              $('.caption-wrapper .current-caption').next().find('h2').text(data.post.author);
+              $('.caption-wrapper .current-caption').next().find('p').text(data.post.text);
             }
+            console.info('updated fields')
+            // Update slide caption
           }
         });
       

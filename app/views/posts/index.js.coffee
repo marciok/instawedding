@@ -1,41 +1,5 @@
-jQuery ->
+jQuery =>
   slider = new BuildSlider()
-  if <%= @posts.count < 11 %>
-    @time = setInterval (=>
-      slider.addSlide()
-      if $('#supersized li').length() > 11
-        clearInterval(@time)
-    ),10000
-  else
-    # setTimeout (-> slider.build()), 8000
-    # new AddNewPosts()
-
-class AddNewPosts
-  constructor: ->
-    setInterval (=> @getPosts()),20000
-
-  getPosts: ->
-    $.getJSON 'posts/latest.json', (data) =>
-      console.info('calling the latest.json')
-      console.info 'json size: '+ data.posts.length
-      if data.posts.length != 0
-        for post, i in data.posts
-          i++
-          console.info ' index number :' + i
-          slide_add = $($('#supersized li')[vars.current_slide + i])
-          thumb_add = $($('#thumb-list li')[$('#thumb-list .current-thumb').index() + i])
-
-          $('.caption-wrapper img').attr('src',post.profile)
-          $('.caption-wrapper h2').text(post.author)
-          $('.caption-wrapper p').text(post.text)
-
-          thumb_add.find('img').attr('src',post.thumb)
-
-          if slide_add.find('img').length == 0
-            slide_add.append("<a target='_blank'><img src='#{post.image}'>")
-          else
-            slide_add.find('img').attr('src',post.image)
-
 class BuildSlider
   constructor: ->
     @slides = 
@@ -53,7 +17,7 @@ class BuildSlider
       slideshow: 1 # Slideshow on/off
       autoplay: 1 # Slideshow starts playing automatically
       stop_loop: 1 # Pauses slideshow on last slide
-      start_slide: <% if @posts.count < 11 %>0<% else %>1<% end %>  # Start slide (0 is random)
+      start_slide: <% if @posts.count < 14 %>0<% else %>1<% end %>  # Start slide (0 is random)
       random: 0 # Randomize slide order (Ignores start slide)
       slide_interval: 7000 # Length between transitions
       transition: 6 # 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
@@ -89,15 +53,16 @@ class BuildSlider
   clean: =>
     $('#supersized').html('')
     $('#thumb-tray').html('')
+    $('.caption-wrapper').html('')
 
 
   addSlide: =>
-    $.getJSON 'posts/latest.json', (data) =>
-      if data.posts != 0
-        for post in data.posts
-          @slides.push({
-            image: post.image
-            title: "<div class='caption-wrapper'><img width='60px' src='#{post.profile}' /><h2>#{post.author}</h2><p>#{post.text}</p>",
-            thumb: post.thumb
-          })
-        @build()
+    console.info 'im on addslide'
+    $.getJSON 'posts/last.json', (data) =>
+      if data != undefined
+        @slides.push({
+          image: data.post.image
+          title: "<div class='caption-wrapper'><img width='60px' src='#{data.post.profile}' /><h2>#{data.post.author}</h2><p>#{data.post.text}</p>",
+          thumb: data.post.thumb
+        })
+      @build()

@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.limit('14')
+    puts @posts.count
 
     respond_to do |format|
       format.html
@@ -16,13 +17,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def latest
-    @posts = Post.where(state: 'notviewed').asc(:created_at).limit(1)
-    @posts.map do |post|
-      UpdatePostState.perform_async(post.id)
-    end
-    respond_to do |format|
-      format.json
+  def last
+    @post = Post.where(state: 'notviewed').asc(:created_at).first
+    if @post
+      @post.state = 'visualized'
+      @post.save!
+
+      respond_to do |format|
+        format.json
+      end
+    else
+      head :not_modified
     end
   end
 
