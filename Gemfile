@@ -35,6 +35,8 @@ gem "state_machine"
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'newrelic_rpm'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

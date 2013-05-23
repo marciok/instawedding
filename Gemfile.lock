@@ -86,6 +86,7 @@ GEM
     moped (1.5.0)
     multi_json (1.7.3)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.0.78)
     origin (1.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -171,6 +172,7 @@ DEPENDENCIES
   instagram
   jquery-rails
   mongoid (>= 2.0.0.beta.19)
+  newrelic_rpm
   rails (= 3.2.13)
   rspec-rails (>= 2.0.1)
   sass-rails (~> 3.2.3)
