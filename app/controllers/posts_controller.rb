@@ -34,11 +34,13 @@ class PostsController < ApplicationController
   private
 
   def update_state
-    if @post
-      @post.viewed
-    else
-      @posts.map do |post|
-        post.viewed
+    if @posts or @post
+      if @post
+        @post.viewed
+      else
+        (@posts || []).map do |post|
+          post.viewed
+        end
       end
     end
   end
