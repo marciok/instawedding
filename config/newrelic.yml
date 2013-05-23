@@ -249,7 +249,7 @@ production:
 # Many applications have a staging environment which behaves
 # identically to production.  Support for that environment is provided
 # here.  By default, the staging environment has the agent turned on.
-staging:
-  <<: *default_settings
-  monitor_mode: true
-  app_name: <%= ENV["NEW_RELIC_APP_NAME"] %> (Staging)
+# staging:
+#   <<: *default_settings
+#   monitor_mode: true
+#   app_name: <%= ENV["NEW_RELIC_APP_NAME"] %> (Staging)
