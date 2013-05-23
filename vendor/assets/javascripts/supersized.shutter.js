@@ -255,12 +255,12 @@
 		    
 				$('.current-thumb').removeClass('current-thumb');
 				$('li', vars.thumb_list).eq(vars.current_slide).addClass('current-thumb');
-        setTimeout(function() {
-          $(vars.thumb_tray).stop().animate({bottom : 0, avoidTransforms : true}, 300 );
-        }, 6000); // 1 second
-        setTimeout(function() {
-          $(vars.thumb_tray).stop().animate({bottom : -$(vars.thumb_tray).height(), avoidTransforms : true}, 300 );
-        }, 2000);
+        // setTimeout(function() {
+        //   $(vars.thumb_tray).stop().animate({bottom : 0, avoidTransforms : true}, 300 );
+        // }, 6000); // 1 second
+        // setTimeout(function() {
+        //   $(vars.thumb_tray).stop().animate({bottom : -$(vars.thumb_tray).height(), avoidTransforms : true}, 300 );
+        // }, 2000);
         
 				
 				// If thumb out of view
