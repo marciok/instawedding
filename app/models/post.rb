@@ -9,6 +9,7 @@ class Post
   field :insta_id, type: String
 
   validates :author, :text, :insta_id, presence: true
+  validates :insta_id, uniqueness: true
 
   state_machine :state, initial: :notviewed do
     event :viewed do

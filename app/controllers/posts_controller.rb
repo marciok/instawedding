@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_filter :validate_instagram_token, only: [ :index ]
+  after_filter :update_state, only: [ :last, :index ]
 
   def create
     # should i create here and fetch via worker ??
@@ -8,8 +9,10 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.limit('14')
-    puts @posts.count
+    @posts = Post.where(state: 'notviewed').asc(:created_at).limit('14')
+    if @posts.empty?
+      @posts = Post.all.asc(:created_at).limit('14')
+    end
 
     respond_to do |format|
       format.html
@@ -20,9 +23,6 @@ class PostsController < ApplicationController
   def last
     @post = Post.where(state: 'notviewed').asc(:created_at).first
     if @post
-      @post.state = 'visualized'
-      @post.save!
-
       respond_to do |format|
         format.json
       end
@@ -32,6 +32,16 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def update_state
+    if @post
+      @post.viewed
+    else
+      @posts.map do |post|
+        post.viewed
+      end
+    end
+  end
 
   def validate_instagram_token
     if params[:'hub.challenge']
