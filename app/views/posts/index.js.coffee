@@ -1,4 +1,10 @@
 jQuery =>
+  fullScreen = ->
+    addEventListener "click", ->
+      el = document.documentElement
+      rfs = el.requestFullScreen or el.webkitRequestFullScreen or el.mozRequestFullScreen
+      rfs.call el
+  fullScreen()
   slider = new BuildSlider()
 class BuildSlider
   constructor: ->
@@ -16,7 +22,7 @@ class BuildSlider
     @setup =
       slideshow: 1 # Slideshow on/off
       autoplay: 1 # Slideshow starts playing automatically
-      stop_loop: 0 # Pauses slideshow on last slide
+      stop_loop: 1 # Pauses slideshow on last slide
       start_slide: <% if @posts.count < 14 %>0<% else %>1<% end %>  # Start slide (0 is random)
       random: 0 # Randomize slide order (Ignores start slide)
       slide_interval: 7000 # Length between transitions
