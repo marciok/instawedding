@@ -1,4 +1,5 @@
 jQuery =>
+
   fullScreen = ->
     addEventListener "click", ->
       el = document.documentElement
@@ -6,6 +7,10 @@ jQuery =>
       rfs.call el
   fullScreen()
   slider = new BuildSlider()
+
+
+  $('img').error -> $(this).hide()
+
 class BuildSlider
   constructor: ->
     @slides = 
@@ -72,3 +77,4 @@ class BuildSlider
           thumb: data.post.thumb
         })
       @build()
+

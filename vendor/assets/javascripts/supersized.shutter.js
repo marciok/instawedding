@@ -231,6 +231,10 @@
 	 	/* Before Slide Transition
 		----------------------------*/
 	 	beforeAnimation : function(direction){
+        $("img").error(function(){
+          $(this).hide();
+        });
+
         $('h1').stop().animate({opacity : 1});
         $('.caption-wrapper .current-caption').removeClass('current-caption');
         $('.caption-wrapper .caption').eq(vars.current_slide).addClass('current-caption');
@@ -287,10 +291,7 @@
 						}
 					}
 				}
-				
-				
 			}
-		    
 	 	},
 	 	
 	 	
@@ -300,6 +301,9 @@
         $('h1').stop().animate({opacity : 0.3});
         $('#thumb-list .current-thumb').next().append('<img class="img-loader" src="assets/progress.gif">');
         $.getJSON('/posts/last.json',function(data){
+          $("img").error(function(){
+            $(this).hide();
+          });
           if (data !== undefined) {
             console.info('calling latest, data: '+ data);
               $('#supersized .activeslide').next().find('img').attr('src',data.post.image);
@@ -312,7 +316,6 @@
             console.info('updated fields');
           }
           $('#thumb-list .current-thumb').next().find('.img-loader').remove();
-          console.info($('#thumb-list .current-thumb').next().find('.img-loader'));
         });
 
 	 		if (api.options.progress_bar && !vars.is_paused) theme.progressBar();	//  Start progress bar
