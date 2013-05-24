@@ -93,6 +93,17 @@
   margin: 0 15px 0 0;
 }
 
+#thumb-list li {
+  position: relative;
+}
+
+.img-loader {
+  width: 31px !important;
+  height: 31px !important;
+  position: absolute;
+  top: 41px;
+  left: 61px;
+}
 
 
 
