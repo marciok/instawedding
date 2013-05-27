@@ -235,7 +235,7 @@
           $(this).hide();
         });
 
-        $('h1').stop().animate({opacity : 1});
+        $('h1').stop().animate({opacity : 0.3});
         $('.caption-wrapper .current-caption').removeClass('current-caption');
         $('.caption-wrapper .caption').eq(vars.current_slide).addClass('current-caption');
 
@@ -261,7 +261,7 @@
 				$('li', vars.thumb_list).eq(vars.current_slide).addClass('current-thumb');
         setTimeout(function() {
           $(vars.thumb_tray).stop().animate({bottom : 0, avoidTransforms : true}, 300);
-        }, 6000); // 1 second
+        }, 6000);
         setTimeout(function() {
           $(vars.thumb_tray).stop().animate({bottom : -$(vars.thumb_tray).height(), avoidTransforms : true}, 300);
         }, 2000);
@@ -298,7 +298,7 @@
 	 	/* After Slide Transition
 		----------------------------*/
 	 	afterAnimation : function(){
-        $('h1').stop().animate({opacity : 0.3});
+        $('h1').stop().animate({opacity : 1});
         $('#thumb-list .current-thumb').next().append('<img class="img-loader" src="assets/progress.gif">');
         $.getJSON('/posts/last.json',function(data){
           $("img").error(function(){
