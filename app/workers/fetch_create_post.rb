@@ -3,7 +3,7 @@ class FetchCreatePost
 
 
   def perform
-    insta_post = Instagram.tag_recent_media(INSTA_TAG).last
+    insta_post = Instagram.tag_recent_media(INSTA_TAG).first
     if insta_post and insta_post.caption
       post = Post.where(insta_id: insta_post.id).first_or_create!(
         insta_id: insta_post.id,
