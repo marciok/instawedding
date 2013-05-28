@@ -9,9 +9,15 @@ conn = Faraday.new do |faraday|
   faraday.adapter  Faraday.default_adapter
 end
 
-recent_posts = Instagram.tag_recent_media(INSTA_TAG)
+# ************* EXTRA ****************
+hangover_posts = Instagram.tag_recent_media('hangoverpupo',max_id: '1360488794583')
+hangover_posts.push(*Instagram.tag_recent_media('hangoverpupo'))
+# ************************************
+
+insta_posts = Instagram.tag_recent_media(INSTA_TAG)
 old_posts = Instagram.tag_recent_media(INSTA_TAG,max_id: '1369292953726')
-insta_posts = recent_posts.push(*old_posts)
+insta_posts = insta_posts.push(*old_posts)
+insta_posts = insta_posts.push(*hangover_posts)
 
 insta_posts.map do |insta_post|
   if insta_post and insta_post.caption
