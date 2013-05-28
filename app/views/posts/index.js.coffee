@@ -7,7 +7,8 @@ jQuery =>
       rfs.call el
   fullScreen()
   slider = new BuildSlider()
-
+  remote = new RemoteControl()
+  remote.subscribe()
 
   $('img').error -> $(this).hide()
 
@@ -77,4 +78,22 @@ class BuildSlider
           thumb: data.post.thumb
         })
       @build()
+
+class RemoteControl
+
+  constructor: -> 
+    @client = new Faye.Client 'http://instsaw-faye.herokuapp.com/faye'
+
+  subscribe: =>
+    @client.subscribe '/commands', (command) ->
+      console.info command
+      switch command
+        when 'play-toggle'
+          api.playToggle()
+        when 'next'
+          api.nextSlide()
+        when 'reload'
+          location.reload()
+
+
 

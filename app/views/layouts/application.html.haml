@@ -3,6 +3,7 @@
   %head
     %title Paulinha e Pupo
     = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "http://instsaw-faye.herokuapp.com/faye.js"
     = javascript_include_tag "application"
     = yield :head
     = csrf_meta_tags
