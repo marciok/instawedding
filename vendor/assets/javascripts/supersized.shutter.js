@@ -313,6 +313,7 @@
               $('.caption-wrapper .current-caption').next().find('h2').text(data.post.author);
               $('.caption-wrapper .current-caption').next().find('p').text(data.post.text);
 
+            console.info(data.post.created_time);
             console.info('updated fields');
           }
           $('#thumb-list .current-thumb').next().find('.img-loader').remove();
