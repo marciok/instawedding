@@ -18,7 +18,7 @@ class BuildSlider
         @posts.map do |post|
           {
             image: post.image.standart,
-            title: "<div class='caption'><img width='60px' src='#{post.image.profile}' /><h2>#{post.author}</h2><p>#{post.text}</p><span>#{post.created_time}</span>",
+            title: "<div class='caption'><img width='60px' src='#{post.image.profile}' /><h2>#{post.author}</h2><p>#{post.text}</p><span>#{post.created_at}</span>",
             thumb: post.image.thumbnail
           }
         end
