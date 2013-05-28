@@ -3,15 +3,14 @@ class PostsController < ApplicationController
   after_filter :update_state, only: [ :last, :index ]
 
   def create
-    # should i create here and fetch via worker ??
     FetchCreatePost.perform_async
     head :ok
   end
 
   def index
-    @posts = Post.where(state: 'notviewed').asc(:created_at).limit('14')
+    @posts = Post.where(state: 'notviewed').asc(:created_at)
     if @posts.empty?
-      @posts = Post.all.asc(:created_at).limit('14')
+      @posts = Post.all.asc(:created_at)
     end
 
     respond_to do |format|

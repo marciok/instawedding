@@ -8,7 +8,8 @@ class FetchCreatePost
       post = Post.where(insta_id: insta_post.id).first_or_create!(
         insta_id: insta_post.id,
         author: insta_post.caption.from.username,
-        text: insta_post.caption.text
+        text: insta_post.caption.text,
+        created_at: Time.at(insta_post.created_time.to_i).utc
       )
       if post
         post.image = Image.new(

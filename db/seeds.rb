@@ -8,7 +8,11 @@
 conn = Faraday.new do |faraday|
   faraday.adapter  Faraday.default_adapter
 end
-insta_posts = Instagram.tag_recent_media(INSTA_TAG)
+
+recent_posts = Instagram.tag_recent_media(INSTA_TAG)
+old_posts = Instagram.tag_recent_media(INSTA_TAG,max_id: '1369292953726')
+insta_posts = recent_posts.push(*old_posts)
+
 insta_posts.map do |insta_post|
   if insta_post and insta_post.caption
     resp = conn.get(insta_post.images.standard_resolution.url)
@@ -16,7 +20,8 @@ insta_posts.map do |insta_post|
       post = Post.where(insta_id: insta_post.id).first_or_create!(
         insta_id: insta_post.id,
         author: insta_post.caption.from.username,
-        text: insta_post.caption.text
+        text: insta_post.caption.text,
+        created_at: Time.at(insta_post.created_time.to_i).utc
       )
       post.image = Image.new(
         standart: insta_post.images.standard_resolution.url,
