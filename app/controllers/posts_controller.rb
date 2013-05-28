@@ -8,9 +8,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.where(state: 'notviewed').asc(:created_at)
+    @posts = Post.where(state: 'notviewed').desc(:created_at)
     if @posts.empty?
-      @posts = Post.all.asc(:created_at)
+      @posts = Post.all.desc(:created_at)
     end
 
     respond_to do |format|
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def last
-    @post = Post.where(state: 'notviewed').asc(:created_at).first
+    @post = Post.where(state: 'notviewed').desc(:created_at).first
     if @post
       respond_to do |format|
         format.json
