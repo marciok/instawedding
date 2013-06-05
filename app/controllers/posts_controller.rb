@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
   def validate_instagram_token
     if params[:'hub.challenge']
-       render text: params[:'hub.challenge']
+      render text: params[:'hub.challenge']
     end
   end
 
