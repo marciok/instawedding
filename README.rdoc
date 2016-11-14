@@ -1,3 +1,4 @@
+⚠️ DEPRECATED. 
 == InstaWedding
 It's a slide show, that presents pictures from a given hashtag on Instagram. 
 You can use to present Instagram pictures on events. 
